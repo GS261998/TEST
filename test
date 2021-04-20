@@ -1,0 +1,22 @@
+close all;
+clear;
+clc;
+
+img = imread('singapore.jpg');
+img_gray = rgb2gray(img);
+figure, imshow(img_gray);
+
+block_size = 20;
+[height,width] = size(img_gray);
+img_gray_noise = img_gray;
+
+for i = 1:2*block_size:height
+    for j = 1:2*block_size:width
+        img_gray_noise(i:min(i+block_size-1,height),j:min(j+block_size-1,width)) = 0;
+    end
+end
+
+figure,imshow(img_gray_noise);
+imwrite(img_gray_noise, 'marvel_noise.jpg');
+
+...
